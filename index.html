@@ -1,13 +1,818 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>conversion-tools</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unitli - Unit Conversion Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Unitli</h1>
+                <p>Simple Unit Conversion Tool</p>
+            </div>
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="converter-container">
+                <div class="converter-nav">
+                    <button class="nav-btn active" data-category="length">Length</button>
+                    <button class="nav-btn" data-category="weight">Weight</button>
+                    <button class="nav-btn" data-category="temperature">Temperature</button>
+                    <button class="nav-btn" data-category="cooking">Cooking</button>
+                    <button class="nav-btn" data-category="volume">Volume</button>
+                    <button class="nav-btn" data-category="speed">Speed</button>
+                    <button class="nav-btn" data-category="area">Area</button>
+                    <button class="nav-btn" data-category="currency">Currency</button>
+                    <button class="nav-btn" data-category="time">Time Zone</button>
+                    <button class="nav-btn" data-category="bmi">BMI</button>
+                    <button class="nav-btn" data-category="financial">Financial</button>
+                    <button class="nav-btn" data-category="shoe">Shoe Size</button>
+                </div>
+
+                <div class="converter-content">
+                    <div class="converter-section active" id="length-converter">
+                        <h2>Length Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="length-value">Value</label>
+                                <input type="number" id="length-value" placeholder="Enter value">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="length-from">From</label>
+                                    <select id="length-from">
+                                        <option value="meter">Meter</option>
+                                        <option value="kilometer">Kilometer</option>
+                                        <option value="centimeter">Centimeter</option>
+                                        <option value="millimeter">Millimeter</option>
+                                        <option value="mile">Mile</option>
+                                        <option value="yard">Yard</option>
+                                        <option value="foot">Foot</option>
+                                        <option value="inch">Inch</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="length-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="length-to">To</label>
+                                    <select id="length-to">
+                                        <option value="meter">Meter</option>
+                                        <option value="kilometer">Kilometer</option>
+                                        <option value="centimeter">Centimeter</option>
+                                        <option value="millimeter">Millimeter</option>
+                                        <option value="mile">Mile</option>
+                                        <option value="yard">Yard</option>
+                                        <option value="foot">Foot</option>
+                                        <option value="inch">Inch</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="length-result">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="weight-converter">
+                        <h2>Weight Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="weight-value">Value</label>
+                                <input type="number" id="weight-value" placeholder="Enter value">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="weight-from">From</label>
+                                    <select id="weight-from">
+                                        <option value="kilogram">Kilogram</option>
+                                        <option value="gram">Gram</option>
+                                        <option value="milligram">Milligram</option>
+                                        <option value="pound">Pound</option>
+                                        <option value="ounce">Ounce</option>
+                                        <option value="stone">Stone</option>
+                                        <option value="ton">Ton</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="weight-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="weight-to">To</label>
+                                    <select id="weight-to">
+                                        <option value="kilogram">Kilogram</option>
+                                        <option value="gram">Gram</option>
+                                        <option value="milligram">Milligram</option>
+                                        <option value="pound">Pound</option>
+                                        <option value="ounce">Ounce</option>
+                                        <option value="stone">Stone</option>
+                                        <option value="ton">Ton</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="weight-result">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="temperature-converter">
+                        <h2>Temperature Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="temperature-value">Value</label>
+                                <input type="number" id="temperature-value" placeholder="Enter value">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="temperature-from">From</label>
+                                    <select id="temperature-from">
+                                        <option value="celsius">Celsius</option>
+                                        <option value="fahrenheit">Fahrenheit</option>
+                                        <option value="kelvin">Kelvin</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="temperature-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="temperature-to">To</label>
+                                    <select id="temperature-to">
+                                        <option value="celsius">Celsius</option>
+                                        <option value="fahrenheit">Fahrenheit</option>
+                                        <option value="kelvin">Kelvin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="temperature-result">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="cooking-converter">
+                        <h2>Cooking Measurements Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="cooking-value">Value</label>
+                                <input type="number" id="cooking-value" placeholder="Enter value">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="cooking-from">From</label>
+                                    <select id="cooking-from">
+                                        <option value="cup">Cup</option>
+                                        <option value="tablespoon">Tablespoon</option>
+                                        <option value="teaspoon">Teaspoon</option>
+                                        <option value="fluid_ounce">Fluid Ounce</option>
+                                        <option value="pint">Pint</option>
+                                        <option value="quart">Quart</option>
+                                        <option value="gallon">Gallon</option>
+                                        <option value="milliliter">Milliliter</option>
+                                        <option value="liter">Liter</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="cooking-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="cooking-to">To</label>
+                                    <select id="cooking-to">
+                                        <option value="cup">Cup</option>
+                                        <option value="tablespoon">Tablespoon</option>
+                                        <option value="teaspoon">Teaspoon</option>
+                                        <option value="fluid_ounce">Fluid Ounce</option>
+                                        <option value="pint">Pint</option>
+                                        <option value="quart">Quart</option>
+                                        <option value="gallon">Gallon</option>
+                                        <option value="milliliter">Milliliter</option>
+                                        <option value="liter">Liter</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="cooking-result">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="volume-converter">
+                        <h2>Volume Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="volume-value">Value</label>
+                                <input type="number" id="volume-value" placeholder="Enter value">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="volume-from">From</label>
+                                    <select id="volume-from">
+                                        <option value="cubic_meter">Cubic Meter</option>
+                                        <option value="cubic_centimeter">Cubic Centimeter</option>
+                                        <option value="liter">Liter</option>
+                                        <option value="milliliter">Milliliter</option>
+                                        <option value="cubic_foot">Cubic Foot</option>
+                                        <option value="cubic_inch">Cubic Inch</option>
+                                        <option value="gallon">Gallon (US)</option>
+                                        <option value="quart">Quart (US)</option>
+                                        <option value="pint">Pint (US)</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="volume-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="volume-to">To</label>
+                                    <select id="volume-to">
+                                        <option value="cubic_meter">Cubic Meter</option>
+                                        <option value="cubic_centimeter">Cubic Centimeter</option>
+                                        <option value="liter">Liter</option>
+                                        <option value="milliliter">Milliliter</option>
+                                        <option value="cubic_foot">Cubic Foot</option>
+                                        <option value="cubic_inch">Cubic Inch</option>
+                                        <option value="gallon">Gallon (US)</option>
+                                        <option value="quart">Quart (US)</option>
+                                        <option value="pint">Pint (US)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="volume-result">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="speed-converter">
+                        <h2>Speed Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="speed-value">Value</label>
+                                <input type="number" id="speed-value" placeholder="Enter value">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="speed-from">From</label>
+                                    <select id="speed-from">
+                                        <option value="meter_per_second">Meter per Second</option>
+                                        <option value="kilometer_per_hour">Kilometer per Hour</option>
+                                        <option value="mile_per_hour">Mile per Hour</option>
+                                        <option value="foot_per_second">Foot per Second</option>
+                                        <option value="knot">Knot</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="speed-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="speed-to">To</label>
+                                    <select id="speed-to">
+                                        <option value="meter_per_second">Meter per Second</option>
+                                        <option value="kilometer_per_hour">Kilometer per Hour</option>
+                                        <option value="mile_per_hour">Mile per Hour</option>
+                                        <option value="foot_per_second">Foot per Second</option>
+                                        <option value="knot">Knot</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="speed-result">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="area-converter">
+                        <h2>Area Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="area-value">Value</label>
+                                <input type="number" id="area-value" placeholder="Enter value">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="area-from">From</label>
+                                    <select id="area-from">
+                                        <option value="square_meter">Square Meter</option>
+                                        <option value="square_kilometer">Square Kilometer</option>
+                                        <option value="square_centimeter">Square Centimeter</option>
+                                        <option value="square_millimeter">Square Millimeter</option>
+                                        <option value="square_mile">Square Mile</option>
+                                        <option value="square_yard">Square Yard</option>
+                                        <option value="square_foot">Square Foot</option>
+                                        <option value="square_inch">Square Inch</option>
+                                        <option value="acre">Acre</option>
+                                        <option value="hectare">Hectare</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="area-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="area-to">To</label>
+                                    <select id="area-to">
+                                        <option value="square_meter">Square Meter</option>
+                                        <option value="square_kilometer">Square Kilometer</option>
+                                        <option value="square_centimeter">Square Centimeter</option>
+                                        <option value="square_millimeter">Square Millimeter</option>
+                                        <option value="square_mile">Square Mile</option>
+                                        <option value="square_yard">Square Yard</option>
+                                        <option value="square_foot">Square Foot</option>
+                                        <option value="square_inch">Square Inch</option>
+                                        <option value="acre">Acre</option>
+                                        <option value="hectare">Hectare</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="area-result">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="currency-converter">
+                        <h2>Currency Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="currency-value">Value</label>
+                                <input type="number" id="currency-value" placeholder="Enter value">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="currency-from">From</label>
+                                    <select id="currency-from">
+                                        <!-- North America -->
+                                        <option value="USD">US Dollar (USD)</option>
+                                        <option value="CAD">Canadian Dollar (CAD)</option>
+                                        <option value="MXN">Mexican Peso (MXN)</option>
+                                        
+                                        <!-- South America -->
+                                        <option value="BRL">Brazilian Real (BRL)</option>
+                                        <option value="ARS">Argentine Peso (ARS)</option>
+                                        <option value="CLP">Chilean Peso (CLP)</option>
+                                        <option value="COP">Colombian Peso (COP)</option>
+                                        <option value="PEN">Peruvian Sol (PEN)</option>
+                                        
+                                        <!-- Europe -->
+                                        <option value="EUR">Euro (EUR)</option>
+                                        <option value="GBP">British Pound (GBP)</option>
+                                        <option value="CHF">Swiss Franc (CHF)</option>
+                                        <option value="NOK">Norwegian Krone (NOK)</option>
+                                        <option value="SEK">Swedish Krona (SEK)</option>
+                                        <option value="DKK">Danish Krone (DKK)</option>
+                                        <option value="PLN">Polish Złoty (PLN)</option>
+                                        <option value="CZK">Czech Koruna (CZK)</option>
+                                        <option value="HUF">Hungarian Forint (HUF)</option>
+                                        <option value="RON">Romanian Leu (RON)</option>
+                                        <option value="TRY">Turkish Lira (TRY)</option>
+                                        <option value="RUB">Russian Ruble (RUB)</option>
+                                        
+                                        <!-- Asia -->
+                                        <option value="JPY">Japanese Yen (JPY)</option>
+                                        <option value="CNY">Chinese Yuan (CNY)</option>
+                                        <option value="HKD">Hong Kong Dollar (HKD)</option>
+                                        <option value="KRW">South Korean Won (KRW)</option>
+                                        <option value="INR">Indian Rupee (INR)</option>
+                                        <option value="IDR">Indonesian Rupiah (IDR)</option>
+                                        <option value="MYR">Malaysian Ringgit (MYR)</option>
+                                        <option value="PHP">Philippine Peso (PHP)</option>
+                                        <option value="SGD">Singapore Dollar (SGD)</option>
+                                        <option value="THB">Thai Baht (THB)</option>
+                                        <option value="VND">Vietnamese Dong (VND)</option>
+                                        <option value="PKR">Pakistani Rupee (PKR)</option>
+                                        <option value="BDT">Bangladeshi Taka (BDT)</option>
+                                        <option value="NPR">Nepalese Rupee (NPR)</option>
+                                        <option value="LKR">Sri Lankan Rupee (LKR)</option>
+                                        <option value="MMK">Myanmar Kyat (MMK)</option>
+                                        <option value="KHR">Cambodian Riel (KHR)</option>
+                                        <option value="LAK">Lao Kip (LAK)</option>
+                                        <option value="BND">Brunei Dollar (BND)</option>
+                                        <option value="TWD">Taiwan Dollar (TWD)</option>
+                                        <option value="MNT">Mongolian Tugrik (MNT)</option>
+                                        
+                                        <!-- Middle East -->
+                                        <option value="AED">UAE Dirham (AED)</option>
+                                        <option value="SAR">Saudi Riyal (SAR)</option>
+                                        <option value="QAR">Qatari Riyal (QAR)</option>
+                                        <option value="KWD">Kuwaiti Dinar (KWD)</option>
+                                        <option value="BHD">Bahraini Dinar (BHD)</option>
+                                        <option value="OMR">Omani Rial (OMR)</option>
+                                        <option value="JOD">Jordanian Dinar (JOD)</option>
+                                        <option value="ILS">Israeli Shekel (ILS)</option>
+                                        <option value="IRR">Iranian Rial (IRR)</option>
+                                        <option value="IQD">Iraqi Dinar (IQD)</option>
+                                        <option value="YER">Yemeni Rial (YER)</option>
+                                        <option value="LBP">Lebanese Pound (LBP)</option>
+                                        <option value="SYP">Syrian Pound (SYP)</option>
+                                        
+                                        <!-- Africa -->
+                                        <option value="ZAR">South African Rand (ZAR)</option>
+                                        <option value="EGP">Egyptian Pound (EGP)</option>
+                                        <option value="NGN">Nigerian Naira (NGN)</option>
+                                        <option value="GHS">Ghanaian Cedi (GHS)</option>
+                                        <option value="KES">Kenyan Shilling (KES)</option>
+                                        <option value="MAD">Moroccan Dirham (MAD)</option>
+                                        <option value="TND">Tunisian Dinar (TND)</option>
+                                        <option value="DZD">Algerian Dinar (DZD)</option>
+                                        <option value="XOF">West African CFA Franc (XOF)</option>
+                                        <option value="XAF">Central African CFA Franc (XAF)</option>
+                                        <option value="ETB">Ethiopian Birr (ETB)</option>
+                                        <option value="UGX">Ugandan Shilling (UGX)</option>
+                                        <option value="TZS">Tanzanian Shilling (TZS)</option>
+                                        <option value="ZMW">Zambian Kwacha (ZMW)</option>
+                                        <option value="MWK">Malawian Kwacha (MWK)</option>
+                                        <option value="MZN">Mozambican Metical (MZN)</option>
+                                        <option value="BWP">Botswanan Pula (BWP)</option>
+                                        <option value="NAD">Namibian Dollar (NAD)</option>
+                                        <option value="RWF">Rwandan Franc (RWF)</option>
+                                        <option value="BIF">Burundian Franc (BIF)</option>
+                                        <option value="SLL">Sierra Leonean Leone (SLL)</option>
+                                        <option value="LRD">Liberian Dollar (LRD)</option>
+                                        <option value="GMD">Gambian Dalasi (GMD)</option>
+                                        <option value="GNF">Guinean Franc (GNF)</option>
+                                        <option value="SZL">Swazi Lilangeni (SZL)</option>
+                                        <option value="LSL">Lesotho Loti (LSL)</option>
+                                        <option value="MUR">Mauritian Rupee (MUR)</option>
+                                        <option value="SCR">Seychellois Rupee (SCR)</option>
+                                        <option value="CVE">Cape Verdean Escudo (CVE)</option>
+                                        <option value="SOS">Somali Shilling (SOS)</option>
+                                        <option value="DJF">Djiboutian Franc (DJF)</option>
+                                        <option value="SDG">Sudanese Pound (SDG)</option>
+                                        <option value="SSP">South Sudanese Pound (SSP)</option>
+                                        <option value="LYD">Libyan Dinar (LYD)</option>
+                                        
+                                        <!-- Oceania -->
+                                        <option value="AUD">Australian Dollar (AUD)</option>
+                                        <option value="NZD">New Zealand Dollar (NZD)</option>
+                                        <option value="FJD">Fijian Dollar (FJD)</option>
+                                        <option value="PGK">Papua New Guinean Kina (PGK)</option>
+                                        <option value="SBD">Solomon Islands Dollar (SBD)</option>
+                                        <option value="VUV">Vanuatu Vatu (VUV)</option>
+                                        <option value="TOP">Tongan Paʻanga (TOP)</option>
+                                        <option value="WST">Samoan Tala (WST)</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="currency-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="currency-to">To</label>
+                                    <select id="currency-to">
+                                        <!-- North America -->
+                                        <option value="USD">US Dollar (USD)</option>
+                                        <option value="CAD">Canadian Dollar (CAD)</option>
+                                        <option value="MXN">Mexican Peso (MXN)</option>
+                                        
+                                        <!-- South America -->
+                                        <option value="BRL">Brazilian Real (BRL)</option>
+                                        <option value="ARS">Argentine Peso (ARS)</option>
+                                        <option value="CLP">Chilean Peso (CLP)</option>
+                                        <option value="COP">Colombian Peso (COP)</option>
+                                        <option value="PEN">Peruvian Sol (PEN)</option>
+                                        
+                                        <!-- Europe -->
+                                        <option value="EUR">Euro (EUR)</option>
+                                        <option value="GBP">British Pound (GBP)</option>
+                                        <option value="CHF">Swiss Franc (CHF)</option>
+                                        <option value="NOK">Norwegian Krone (NOK)</option>
+                                        <option value="SEK">Swedish Krona (SEK)</option>
+                                        <option value="DKK">Danish Krone (DKK)</option>
+                                        <option value="PLN">Polish Złoty (PLN)</option>
+                                        <option value="CZK">Czech Koruna (CZK)</option>
+                                        <option value="HUF">Hungarian Forint (HUF)</option>
+                                        <option value="RON">Romanian Leu (RON)</option>
+                                        <option value="TRY">Turkish Lira (TRY)</option>
+                                        <option value="RUB">Russian Ruble (RUB)</option>
+                                        
+                                        <!-- Asia -->
+                                        <option value="JPY">Japanese Yen (JPY)</option>
+                                        <option value="CNY">Chinese Yuan (CNY)</option>
+                                        <option value="HKD">Hong Kong Dollar (HKD)</option>
+                                        <option value="KRW">South Korean Won (KRW)</option>
+                                        <option value="INR">Indian Rupee (INR)</option>
+                                        <option value="IDR">Indonesian Rupiah (IDR)</option>
+                                        <option value="MYR">Malaysian Ringgit (MYR)</option>
+                                        <option value="PHP">Philippine Peso (PHP)</option>
+                                        <option value="SGD">Singapore Dollar (SGD)</option>
+                                        <option value="THB">Thai Baht (THB)</option>
+                                        <option value="VND">Vietnamese Dong (VND)</option>
+                                        <option value="PKR">Pakistani Rupee (PKR)</option>
+                                        <option value="BDT">Bangladeshi Taka (BDT)</option>
+                                        <option value="NPR">Nepalese Rupee (NPR)</option>
+                                        <option value="LKR">Sri Lankan Rupee (LKR)</option>
+                                        <option value="MMK">Myanmar Kyat (MMK)</option>
+                                        <option value="KHR">Cambodian Riel (KHR)</option>
+                                        <option value="LAK">Lao Kip (LAK)</option>
+                                        <option value="BND">Brunei Dollar (BND)</option>
+                                        <option value="TWD">Taiwan Dollar (TWD)</option>
+                                        <option value="MNT">Mongolian Tugrik (MNT)</option>
+                                        
+                                        <!-- Middle East -->
+                                        <option value="AED">UAE Dirham (AED)</option>
+                                        <option value="SAR">Saudi Riyal (SAR)</option>
+                                        <option value="QAR">Qatari Riyal (QAR)</option>
+                                        <option value="KWD">Kuwaiti Dinar (KWD)</option>
+                                        <option value="BHD">Bahraini Dinar (BHD)</option>
+                                        <option value="OMR">Omani Rial (OMR)</option>
+                                        <option value="JOD">Jordanian Dinar (JOD)</option>
+                                        <option value="ILS">Israeli Shekel (ILS)</option>
+                                        <option value="IRR">Iranian Rial (IRR)</option>
+                                        <option value="IQD">Iraqi Dinar (IQD)</option>
+                                        <option value="YER">Yemeni Rial (YER)</option>
+                                        <option value="LBP">Lebanese Pound (LBP)</option>
+                                        <option value="SYP">Syrian Pound (SYP)</option>
+                                        
+                                        <!-- Africa -->
+                                        <option value="ZAR">South African Rand (ZAR)</option>
+                                        <option value="EGP">Egyptian Pound (EGP)</option>
+                                        <option value="NGN">Nigerian Naira (NGN)</option>
+                                        <option value="GHS">Ghanaian Cedi (GHS)</option>
+                                        <option value="KES">Kenyan Shilling (KES)</option>
+                                        <option value="MAD">Moroccan Dirham (MAD)</option>
+                                        <option value="TND">Tunisian Dinar (TND)</option>
+                                        <option value="DZD">Algerian Dinar (DZD)</option>
+                                        <option value="XOF">West African CFA Franc (XOF)</option>
+                                        <option value="XAF">Central African CFA Franc (XAF)</option>
+                                        <option value="ETB">Ethiopian Birr (ETB)</option>
+                                        <option value="UGX">Ugandan Shilling (UGX)</option>
+                                        <option value="TZS">Tanzanian Shilling (TZS)</option>
+                                        <option value="ZMW">Zambian Kwacha (ZMW)</option>
+                                        <option value="MWK">Malawian Kwacha (MWK)</option>
+                                        <option value="MZN">Mozambican Metical (MZN)</option>
+                                        <option value="BWP">Botswanan Pula (BWP)</option>
+                                        <option value="NAD">Namibian Dollar (NAD)</option>
+                                        <option value="RWF">Rwandan Franc (RWF)</option>
+                                        <option value="BIF">Burundian Franc (BIF)</option>
+                                        <option value="SLL">Sierra Leonean Leone (SLL)</option>
+                                        <option value="LRD">Liberian Dollar (LRD)</option>
+                                        <option value="GMD">Gambian Dalasi (GMD)</option>
+                                        <option value="GNF">Guinean Franc (GNF)</option>
+                                        <option value="SZL">Swazi Lilangeni (SZL)</option>
+                                        <option value="LSL">Lesotho Loti (LSL)</option>
+                                        <option value="MUR">Mauritian Rupee (MUR)</option>
+                                        <option value="SCR">Seychellois Rupee (SCR)</option>
+                                        <option value="CVE">Cape Verdean Escudo (CVE)</option>
+                                        <option value="SOS">Somali Shilling (SOS)</option>
+                                        <option value="DJF">Djiboutian Franc (DJF)</option>
+                                        <option value="SDG">Sudanese Pound (SDG)</option>
+                                        <option value="SSP">South Sudanese Pound (SSP)</option>
+                                        <option value="LYD">Libyan Dinar (LYD)</option>
+                                        
+                                        <!-- Oceania -->
+                                        <option value="AUD">Australian Dollar (AUD)</option>
+                                        <option value="NZD">New Zealand Dollar (NZD)</option>
+                                        <option value="FJD">Fijian Dollar (FJD)</option>
+                                        <option value="PGK">Papua New Guinean Kina (PGK)</option>
+                                        <option value="SBD">Solomon Islands Dollar (SBD)</option>
+                                        <option value="VUV">Vanuatu Vatu (VUV)</option>
+                                        <option value="TOP">Tongan Paʻanga (TOP)</option>
+                                        <option value="WST">Samoan Tala (WST)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="currency-result">0</div>
+                            </div>
+                            <div class="note">
+                                <p>Note: Exchange rates are for demonstration purposes and may not reflect current market rates.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="time-converter">
+                        <h2>Time Zone Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="time-value">Time (HH:MM)</label>
+                                <input type="time" id="time-value" value="12:00">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="time-from">From</label>
+                                    <select id="time-from">
+                                        <option value="UTC">UTC</option>
+                                        <option value="EST">EST (UTC-5)</option>
+                                        <option value="CST">CST (UTC-6)</option>
+                                        <option value="MST">MST (UTC-7)</option>
+                                        <option value="PST">PST (UTC-8)</option>
+                                        <option value="GMT">GMT (UTC+0)</option>
+                                        <option value="CET">CET (UTC+1)</option>
+                                        <option value="JST">JST (UTC+9)</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="time-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="time-to">To</label>
+                                    <select id="time-to">
+                                        <option value="UTC">UTC</option>
+                                        <option value="EST">EST (UTC-5)</option>
+                                        <option value="CST">CST (UTC-6)</option>
+                                        <option value="MST">MST (UTC-7)</option>
+                                        <option value="PST">PST (UTC-8)</option>
+                                        <option value="GMT">GMT (UTC+0)</option>
+                                        <option value="CET">CET (UTC+1)</option>
+                                        <option value="JST">JST (UTC+9)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="time-result">12:00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="bmi-converter">
+                        <h2>BMI Calculator</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="bmi-height">Height</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="bmi-height" placeholder="Enter height">
+                                    <select id="bmi-height-unit">
+                                        <option value="cm">cm</option>
+                                        <option value="m">m</option>
+                                        <option value="ft">ft</option>
+                                        <option value="in">in</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="bmi-weight">Weight</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="bmi-weight" placeholder="Enter weight">
+                                    <select id="bmi-weight-unit">
+                                        <option value="kg">kg</option>
+                                        <option value="lb">lb</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="bmi-calculate" class="calculate-btn">Calculate BMI</button>
+                            <div class="result-group">
+                                <label>BMI</label>
+                                <div class="result" id="bmi-result">0</div>
+                            </div>
+                            <div class="result-group">
+                                <label>Category</label>
+                                <div class="result" id="bmi-category">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="financial-converter">
+                        <h2>Financial Calculator</h2>
+                        <div class="converter-form">
+                            <div class="tabs">
+                                <button class="tab-btn active" data-tab="loan">Loan</button>
+                                <button class="tab-btn" data-tab="savings">Savings</button>
+                            </div>
+                            <div class="tab-content active" id="loan-tab">
+                                <div class="input-group">
+                                    <label for="loan-amount">Loan Amount</label>
+                                    <input type="number" id="loan-amount" placeholder="Enter loan amount">
+                                </div>
+                                <div class="input-group">
+                                    <label for="loan-interest">Interest Rate (%)</label>
+                                    <input type="number" id="loan-interest" placeholder="Enter interest rate">
+                                </div>
+                                <div class="input-group">
+                                    <label for="loan-term">Term (years)</label>
+                                    <input type="number" id="loan-term" placeholder="Enter loan term">
+                                </div>
+                                <button id="loan-calculate" class="calculate-btn">Calculate</button>
+                                <div class="result-group">
+                                    <label>Monthly Payment</label>
+                                    <div class="result" id="loan-payment">$0</div>
+                                </div>
+                                <div class="result-group">
+                                    <label>Total Payment</label>
+                                    <div class="result" id="loan-total">$0</div>
+                                </div>
+                                <div class="result-group">
+                                    <label>Total Interest</label>
+                                    <div class="result" id="loan-interest-total">$0</div>
+                                </div>
+                            </div>
+                            <div class="tab-content" id="savings-tab">
+                                <div class="input-group">
+                                    <label for="savings-initial">Initial Investment</label>
+                                    <input type="number" id="savings-initial" placeholder="Enter initial amount">
+                                </div>
+                                <div class="input-group">
+                                    <label for="savings-monthly">Monthly Contribution</label>
+                                    <input type="number" id="savings-monthly" placeholder="Enter monthly amount">
+                                </div>
+                                <div class="input-group">
+                                    <label for="savings-interest">Annual Interest Rate (%)</label>
+                                    <input type="number" id="savings-interest" placeholder="Enter interest rate">
+                                </div>
+                                <div class="input-group">
+                                    <label for="savings-years">Years</label>
+                                    <input type="number" id="savings-years" placeholder="Enter years">
+                                </div>
+                                <button id="savings-calculate" class="calculate-btn">Calculate</button>
+                                <div class="result-group">
+                                    <label>Future Value</label>
+                                    <div class="result" id="savings-future">$0</div>
+                                </div>
+                                <div class="result-group">
+                                    <label>Total Contributions</label>
+                                    <div class="result" id="savings-contributions">$0</div>
+                                </div>
+                                <div class="result-group">
+                                    <label>Total Interest Earned</label>
+                                    <div class="result" id="savings-interest-earned">$0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="converter-section" id="shoe-converter">
+                        <h2>Shoe Size Converter</h2>
+                        <div class="converter-form">
+                            <div class="input-group">
+                                <label for="shoe-value">Size</label>
+                                <input type="number" id="shoe-value" placeholder="Enter size" step="0.5">
+                            </div>
+                            <div class="select-group">
+                                <div class="from-group">
+                                    <label for="shoe-from">From</label>
+                                    <select id="shoe-from">
+                                        <option value="us-men">US (Men)</option>
+                                        <option value="us-women">US (Women)</option>
+                                        <option value="uk">UK</option>
+                                        <option value="eu">EU</option>
+                                        <option value="cm">CM (Japan)</option>
+                                    </select>
+                                </div>
+                                <div class="swap-btn">
+                                    <button id="shoe-swap">
+                                        <i class="fas fa-exchange-alt"></i>
+                                    </button>
+                                </div>
+                                <div class="to-group">
+                                    <label for="shoe-to">To</label>
+                                    <select id="shoe-to">
+                                        <option value="us-men">US (Men)</option>
+                                        <option value="us-women">US (Women)</option>
+                                        <option value="uk">UK</option>
+                                        <option value="eu">EU</option>
+                                        <option value="cm">CM (Japan)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="result-group">
+                                <label>Result</label>
+                                <div class="result" id="shoe-result">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Unitli - Unit Conversion Tool. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
